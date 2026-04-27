@@ -3,14 +3,23 @@
   <head>
     <title>Update App</title>
     <script>
-      const ua = navigator.userAgent;
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-      if (/android/i.test(ua)) {
+      // iOS detection
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        window.location.href = "https://apps.apple.com/app/id6760333775";
+      }
+      // Android detection
+      else if (/android/i.test(ua)) {
         window.location.href =
           "https://play.google.com/store/apps/details?id=com.prism.ConventionCancun";
-      } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      }
+      // Mac (treat like iOS for testing)
+      else if (/Macintosh/i.test(ua)) {
         window.location.href = "https://apps.apple.com/app/id6760333775";
-      } else {
+      }
+      // fallback
+      else {
         window.location.href =
           "https://play.google.com/store/apps/details?id=com.prism.ConventionCancun";
       }
